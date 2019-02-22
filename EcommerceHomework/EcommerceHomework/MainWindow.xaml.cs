@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.IO;
+using Microsoft.VisualBasic;
 
 
 namespace EcommerceHomework
@@ -72,7 +73,7 @@ namespace EcommerceHomework
             }
             
 
-            us.PicturePath = imageFile.Source.ToString();
+            //us.PicturePath = imageFile.Source.ToString();
             //MessageBox.Show(imageFile.Source.ToString());
             Validation();
             us.saveData();
@@ -81,12 +82,31 @@ namespace EcommerceHomework
         private void View_Click(object sender, RoutedEventArgs e)
         {
             //User mc = new User();
-            MessageBoxResult mbr = MessageBox.Show("Please enter your username");
-            string userName = mbr.ToString();
-            MessageBox.Show(userName);
+            //MessageBoxResult mbr = MessageBox.Show("Please enter your username");
+            //string userName = mbr.ToString();
+            //MessageBox.Show(userName);
             //string[] sw = File.ReadAllLines("UserData.txt");
             //string[] str = sw[0].Split(',');
             //Username_textbox.Text = str[0];
+
+            string username = Interaction.InputBox("Please enter username", "Username box", "");
+            string[] sw = File.ReadAllLines("UserData.txt");
+            MessageBox.Show(username);
+            //go in a loop andsplit each line an array and check the value of index
+            //zero to see if it matches with the username collected above
+            for (int i = 0; i < sw.Length; i++)
+            {
+                string[] str = sw[i].Split(',');
+                if (username == str[0])
+                {
+                    //We have the line containing
+                    //data for susan or any user
+                    //and we can use the value to populate the input boxes 
+                    Username_textbox.Text = str[0];
+                    //password.text = str[1] and so on and so forth
+                }
+               
+            }
         }
 
         private void RadioButton_Checked_1(object sender, RoutedEventArgs e)
